@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #0e1218;
+  --color-panel: #161b24;
+  --color-line: #262d3a;
+  --color-bone: #f2efe8;
+  --color-mist: #9ba3b3;
+  --color-glow: #ffc24b;
+  --color-free: #4cc9a0;
+  --color-soon: #6fa8ff;
+  --color-clash: #ff6b63;
+}
+
+html { scroll-behavior: smooth; background: var(--color-ink); }
+body { font-family: var(--font-sans); background: var(--color-ink); color: var(--color-bone); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 2px solid var(--color-glow); outline-offset: 3px; border-radius: 6px; }
+
+.blk { position: absolute; top: 0; bottom: 0; border-radius: .75rem; padding: .6rem .7rem; overflow: hidden; border: 1px solid; line-height: 1.2; }
+.blk small { display: block; opacity: .7; font-size: .7rem; white-space: nowrap; }
+.blk b { display: block; font-weight: 600; font-size: .85rem; white-space: nowrap; }
+.blk-soon { background: rgb(111 168 255 / .16); border-color: var(--color-soon); }
+.blk-done { background: rgb(155 163 179 / .1); border-color: var(--color-line); color: var(--color-mist); }
+
+/* Pinned scene: state is driven by data-step on #board */
+#maya { background: rgb(255 194 75 / .16); border-color: var(--color-glow); z-index: 2; transition: background .35s, border-color .35s; }
+#maya .warn { display: none; }
+#board[data-step="1"] #maya { background: rgb(255 107 99 / .28); border-color: var(--color-clash); }
+#board[data-step="1"] #maya .warn { display: inline; }
+#board[data-step="1"] #maya .lock { display: none; }
+.cap { position: absolute; inset: 0; opacity: 0; transform: translateY(8px); transition: opacity .35s, transform .35s; }
+#board[data-step="0"] .cap[data-i="0"], #board[data-step="1"] .cap[data-i="1"], #board[data-step="2"] .cap[data-i="2"] { opacity: 1; transform: none; }
+
+/* Ecosystem rail */
+.rail { --p: 1; --dir: bottom; background: linear-gradient(to var(--dir), var(--color-glow) calc(var(--p) * 100%), var(--color-line) 0); }
+@media (min-width: 768px) { .rail { --dir: right; } }
+.node { transition: border-color .4s, opacity .4s; }
+.node:not(.on) { opacity: .45; }
+.node.on { border-color: var(--color-glow); }
+
+@keyframes ping { 75%, 100% { transform: scale(2.2); opacity: 0; } }
+.ping { animation: ping 2s cubic-bezier(0, 0, .2, 1) infinite; }
+@media (prefers-reduced-motion: reduce) { .ping { animation: none; } html { scroll-behavior: auto; } }
+
+#nav.scrolled { background: rgb(14 18 24 / .85); backdrop-filter: blur(12px); }
+.chip { border: 1px solid rgb(14 18 24 / .25); border-radius: 999px; padding: .5rem 1rem; font-weight: 500; transition: background .2s, color .2s; }
+.chip:hover { border-color: var(--color-ink); }
+.chip[aria-pressed="true"] { background: var(--color-ink); color: var(--color-bone); border-color: var(--color-ink); }
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+@layer components { .lift { position: relative; background-color: var(--color-ink); border-radius: 2.5rem 2.5rem 0 0; } }

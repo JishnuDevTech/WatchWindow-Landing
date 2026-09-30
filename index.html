@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WatchWindow — Everyone knows the window</title>
+  <meta name="description" content="WatchWindow is a shared schedule for the one TV in your home. See who has it, what's planned, and when it's free.">
+  <meta name="theme-color" content="#0e1218">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e1218'/%3E%3Crect x='6' y='9' width='20' height='14' rx='3' fill='none' stroke='%23ffc24b' stroke-width='2.5'/%3E%3Crect x='17' y='9' width='9' height='14' rx='3' fill='%23ffc24b'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-glow focus:text-ink focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
+
+  <header id="nav" class="fixed inset-x-0 top-0 z-40 transition-colors duration-300">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10" aria-label="Main">
+      <a href="#top" class="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
+        <svg width="26" height="26" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="7" width="26" height="18" rx="4" fill="none" stroke="#ffc24b" stroke-width="2.5"/><rect x="17" y="7" width="12" height="18" rx="4" fill="#ffc24b"/></svg>
+        WatchWindow
+      </a>
+      <div class="flex items-center gap-6 text-sm">
+        <a href="#how" class="hidden text-mist transition hover:text-bone md:inline">How it works</a>
+        <a href="#ecosystem" class="hidden text-mist transition hover:text-bone md:inline">Where it's going</a>
+        <a data-cfg="github" href="#" rel="noopener" class="hidden text-mist transition hover:text-bone sm:inline" aria-label="GitHub repository"><i data-lucide="github" class="size-5"></i></a>
+        <a data-cfg="app" href="/app" class="rounded-full bg-glow px-4 py-2 font-semibold text-ink transition hover:brightness-110">Try WatchWindow</a>
+        <button id="menuBtn" class="md:hidden" aria-expanded="false" aria-controls="menu" aria-label="Menu"><i data-lucide="menu" class="size-6"></i></button>
+      </div>
+    </nav>
+    <div id="menu" hidden class="border-t border-line bg-ink px-5 py-6 font-display text-3xl font-bold md:hidden"><a href="#demo" class="block py-2">Try the demo</a><a href="#how" class="block py-2">How it works</a><a href="#ecosystem" class="block py-2">Where it's going</a></div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section id="top" class="relative flex min-h-svh flex-col justify-center px-5 pb-16 pt-28 md:px-10">
+      <div class="mx-auto w-full max-w-7xl">
+        <h1 class="font-display text-[clamp(3.4rem,13vw,12rem)] font-extrabold leading-[.9] tracking-[-.04em]">
+          <span class="block overflow-hidden"><span class="hl block">Everyone</span></span>
+          <span class="block overflow-hidden"><span class="hl block">knows the</span></span>
+          <span class="block overflow-hidden"><span class="hl block">window.</span></span>
+        </h1>
+        <div class="hero-sub mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div><p class="max-w-md text-lg text-mist md:text-xl">One TV, a whole household. WatchWindow puts everyone's viewing time on a single schedule, so nobody has to ask.</p>
+            <div class="mt-8 flex flex-wrap items-center gap-6"><a data-cfg="app" href="/app" class="group inline-flex items-center gap-2 rounded-full bg-glow px-7 py-3.5 font-semibold text-ink transition hover:brightness-110">Try WatchWindow <i data-lucide="arrow-right" class="size-5 transition-transform group-hover:translate-x-1"></i></a><a href="#demo" class="font-semibold underline underline-offset-4 decoration-mist/50 transition hover:decoration-glow">See how it works</a></div></div>
+          <div class="flex items-center gap-4 self-start rounded-2xl border border-line bg-panel px-5 py-4 md:self-auto" role="status">
+            <span class="relative flex size-3"><span class="ping absolute inline-flex size-full rounded-full bg-free"></span><span class="relative inline-flex size-3 rounded-full bg-free"></span></span>
+            <div>
+              <p class="text-sm text-mist">Living room TV</p>
+              <p id="statusText" class="font-display text-2xl font-bold transition-opacity duration-300">Free at 10:30 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The problem -->
+    <section id="story" class="bg-bone px-5 py-32 text-ink md:px-10 md:py-48">
+      <div class="mx-auto max-w-7xl">
+        <div class="space-y-4 font-display text-[clamp(2rem,6.5vw,6rem)] font-bold leading-[1.02] tracking-[-.03em]">
+          <p class="q">"When are you done with the TV?"</p>
+          <p class="q">"You said eight."</p>
+          <p class="q">"I've been waiting all week for this."</p>
+        </div>
+        <p class="mt-14 max-w-lg font-display text-2xl font-semibold md:text-3xl">The TV isn't the problem. Not knowing is.</p>
+        <ul class="mt-20 grid gap-10 border-t border-ink/15 pt-10 md:grid-cols-3">
+          <li><i data-lucide="tv" class="mb-4 size-6"></i><h2 class="font-display text-xl font-bold">See who has it</h2><p class="mt-2 text-[#5b6270]">What's on now, who's next, and when it's free.</p></li>
+          <li><i data-lucide="hourglass" class="mb-4 size-6"></i><h2 class="font-display text-xl font-bold">Ask for the time you need</h2><p class="mt-2 text-[#5b6270]">Pick a show and how long it runs. WatchWindow finds the gap.</p></li>
+          <li><i data-lucide="triangle-alert" class="mb-4 size-6"></i><h2 class="font-display text-xl font-bold">Catch clashes early</h2><p class="mt-2 text-[#5b6270]">Overlaps show up on the schedule, before they show up at the couch.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Chaos -->
+    <section id="chaos" class="overflow-hidden px-5 py-32 md:px-10 md:py-48" aria-labelledby="chaos-h">
+      <div class="mx-auto max-w-7xl">
+        <h2 id="chaos-h" class="font-display text-[clamp(2.4rem,7vw,6.5rem)] font-bold leading-[.98] tracking-[-.035em]">Three people. One evening. <span id="chaosState" class="text-clash">Nobody's sure.</span></h2>
+        <div class="relative mt-16 h-72 rounded-3xl border border-line bg-panel p-4 md:p-8" role="img" aria-label="Three overlapping TV requests that sort into separate, visible slots as you scroll.">
+          <div id="cDad" class="blk" style="left:2rem;right:45%;top:2rem;height:5rem;border-color:var(--color-clash);background:rgb(255 107 99/.12)"><b>Dad</b><small>7:00 PM · Match</small></div>
+          <div id="cMaya" class="blk" style="left:30%;right:18%;top:3rem;height:5rem;border-color:var(--color-clash);background:rgb(255 107 99/.12)"><b>Maya</b><small>8:30 PM · Movie</small></div>
+          <div id="cKabir" class="blk" style="left:45%;right:2rem;top:4rem;height:5rem;border-color:var(--color-clash);background:rgb(255 107 99/.12)"><b>Kabir</b><small>9:00 PM · Series</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pinned schedule scene -->
+    <section id="how" class="relative flex min-h-svh items-center overflow-hidden px-5 py-20 md:px-10" aria-labelledby="how-h">
+      <div id="board" data-step="2" class="mx-auto w-full max-w-7xl">
+        <h2 id="how-h" class="sr-only">How a viewing window is booked</h2>
+        <div class="relative mb-10 h-32 md:h-28" aria-live="polite">
+          <div class="cap" data-i="0"><p class="font-display text-3xl font-bold tracking-tight md:text-5xl">Tonight, the TV already has a plan.</p><p class="mt-3 text-mist">Kabir finished at 7. Dad has the match until 8:30.</p></div>
+          <div class="cap" data-i="1"><p class="font-display text-3xl font-bold tracking-tight md:text-5xl">Maya asks for a movie at 8.</p><p class="mt-3 text-clash">That overlaps the match by 30 minutes. It shows up right away.</p></div>
+          <div class="cap" data-i="2"><p class="font-display text-3xl font-bold tracking-tight md:text-5xl">8:30 to 10:30. Locked in.</p><p class="mt-3 text-mist">Everyone sees it. Nobody has to ask.</p></div>
+        </div>
+
+        <div class="rounded-3xl border border-line bg-panel p-4 md:p-8">
+          <div class="mb-3 flex justify-between text-xs text-mist md:text-sm" aria-hidden="true"><span>6 PM</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11 PM</span></div>
+          <div class="relative h-24 md:h-32" role="img" aria-label="Living room TV schedule from 6 PM to 11 PM: Kabir until 7, Dad's match 7 to 8:30, Maya's movie 8:30 to 10:30, free from 10:30.">
+            <div class="absolute inset-0 grid grid-cols-5" aria-hidden="true"><i class="border-l border-line"></i><i class="border-l border-line"></i><i class="border-l border-line"></i><i class="border-l border-line"></i><i class="border-x border-line"></i></div>
+            <div class="blk blk-done" id="kabir" style="left:0;width:20%"><b>Kabir</b><small>Done</small></div>
+            <div class="blk blk-soon" id="dad" style="left:20%;width:30%"><b>Dad · Match</b><small>7:00 – 8:30</small></div>
+            <div class="blk" id="maya" style="left:50%;width:40%"><b>Maya · Movie <i data-lucide="lock" class="lock ml-1 inline size-3.5"></i><i data-lucide="triangle-alert" class="warn ml-1 size-3.5"></i></b><small>8:30 – 10:30</small></div>
+            <div class="blk border-dashed border-free/60 text-free" id="free" style="left:90%;width:10%;padding:.6rem .4rem"><b class="!text-xs">Free</b></div>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-mist md:text-sm">
+            <span class="flex items-center gap-2"><i class="size-2.5 rounded-full bg-soon"></i>Upcoming</span>
+            <span class="flex items-center gap-2"><i class="size-2.5 rounded-full bg-glow"></i>Reserved</span>
+            <span class="flex items-center gap-2"><i class="size-2.5 rounded-full bg-clash"></i>Conflict</span>
+            <span class="flex items-center gap-2"><i class="size-2.5 rounded-full bg-free"></i>Available</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive demo -->
+    <section id="demo" class="bg-bone px-5 py-32 text-ink md:px-10 md:py-48" aria-labelledby="demo-h">
+      <div class="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[1fr_1.3fr]">
+        <div>
+          <h2 id="demo-h" class="font-display text-[clamp(2.6rem,6vw,5.5rem)] font-extrabold leading-[.95] tracking-[-.04em]">Book the TV. Right here.</h2>
+          <p class="mt-5 max-w-sm text-[#5b6270]">Pick who, what and how long. WatchWindow finds the first free gap tonight.</p>
+          <div class="mt-10 space-y-6" id="demoControls">
+            <div><p class="mb-2 text-sm font-semibold">Who</p><div class="flex flex-wrap gap-2"><button class="chip" data-k="who" aria-pressed="false">Dad</button><button class="chip" data-k="who" aria-pressed="true">Maya</button><button class="chip" data-k="who" aria-pressed="false">Kabir</button></div></div>
+            <div><p class="mb-2 text-sm font-semibold">Watching</p><div class="flex flex-wrap gap-2"><button class="chip" data-k="what" aria-pressed="true">Movie</button><button class="chip" data-k="what" aria-pressed="false">Match</button><button class="chip" data-k="what" aria-pressed="false">Series</button></div></div>
+            <div><p class="mb-2 text-sm font-semibold">For</p><div class="flex flex-wrap gap-2"><button class="chip" data-k="dur" data-v="1" aria-pressed="false">1 hour</button><button class="chip" data-k="dur" data-v="2" aria-pressed="true">2 hours</button><button class="chip" data-k="dur" data-v="3" aria-pressed="false">3 hours</button></div></div>
+          </div>
+        </div>
+        <div class="self-start rounded-3xl bg-ink p-4 text-bone md:p-8">
+          <div class="mb-3 flex justify-between text-xs text-mist md:text-sm" aria-hidden="true"><span>6 PM</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11 PM</span></div>
+          <div class="relative h-24 md:h-32">
+            <div class="absolute inset-0 grid grid-cols-5" aria-hidden="true"><i class="border-l border-line"></i><i class="border-l border-line"></i><i class="border-l border-line"></i><i class="border-l border-line"></i><i class="border-x border-line"></i></div>
+            <div class="blk blk-done" style="left:0;width:20%"><b>Kabir</b><small>Done</small></div>
+            <div class="blk blk-soon" style="left:20%;width:30%"><b>Dad · Match</b><small>7:00 – 8:30</small></div>
+            <div id="dNew" class="blk border-glow bg-glow/15 transition-all duration-500" style="left:50%;width:40%"><b id="dNewT">Maya · Movie</b><small id="dNewS">8:30 – 10:30</small></div>
+          </div>
+          <div class="mt-8 flex flex-wrap items-center justify-between gap-4"><p id="demoOut" class="font-display text-2xl font-bold md:text-3xl" aria-live="polite">8:30 PM – 10:30 PM</p><button id="reserve" class="rounded-full bg-glow px-6 py-3 font-semibold text-ink transition hover:brightness-110 disabled:opacity-40">Reserve this window</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="steps" class="px-5 py-32 md:px-10 md:py-48" aria-labelledby="steps-h">
+      <div class="mx-auto max-w-7xl">
+        <h2 id="steps-h" class="sr-only">How it works</h2>
+        <ol class="grid gap-16 md:grid-cols-3 md:gap-8">
+          <li class="step"><p class="font-display text-6xl font-extrabold text-glow">01</p><h3 class="mt-4 font-display text-4xl font-bold tracking-tight">See the window.</h3><p class="mt-3 text-mist">The whole evening, on one line. Who has the TV, and when it opens up.</p><div class="relative mt-6 h-16 rounded-xl border border-line bg-panel p-2"><div class="relative size-full"><i class="blk blk-soon !p-0" style="left:0;width:35%"></i><i class="blk blk-done !p-0" style="left:38%;width:22%"></i><i class="blk border-dashed border-free/60" style="left:63%;width:37%"></i></div></div></li>
+          <li class="step"><p class="font-display text-6xl font-extrabold text-glow">02</p><h3 class="mt-4 font-display text-4xl font-bold tracking-tight">Choose your time.</h3><p class="mt-3 text-mist">Pick what you're watching and how long. The gap is found for you.</p><div class="relative mt-6 h-16 rounded-xl border border-line bg-panel p-2"><div class="relative size-full"><i class="blk blk-soon !p-0" style="left:0;width:35%"></i><i class="blk border-glow bg-glow/15 !p-0" style="left:38%;width:40%"></i></div></div></li>
+          <li class="step"><p class="font-display text-6xl font-extrabold text-glow">03</p><h3 class="mt-4 font-display text-4xl font-bold tracking-tight">Everyone knows.</h3><p class="mt-3 text-mist">The schedule updates for the whole household. Nobody has to ask.</p><div class="relative mt-6 h-16 rounded-xl border border-line bg-panel p-2"><div class="relative size-full"><i class="blk blk-soon !p-0" style="left:0;width:35%"></i><i class="blk border-glow bg-glow/30 !p-0" style="left:38%;width:40%"></i><i class="blk border-dashed border-free/60" style="left:81%;width:19%"></i></div></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Family -->
+    <section id="family" class="bg-bone px-5 py-32 text-ink md:px-10 md:py-48" aria-labelledby="fam-h">
+      <div class="mx-auto max-w-7xl">
+        <h2 id="fam-h" class="font-display text-[clamp(3rem,11vw,10rem)] font-extrabold leading-[.9] tracking-[-.045em]">No more asking.</h2>
+        <p class="mt-6 max-w-md text-lg text-[#5b6270]">Not a calendar. A shared TV schedule the whole household can read at a glance.</p>
+        <div class="mt-16 space-y-3">
+          <div class="grid items-center gap-2 md:grid-cols-[8rem_1fr]"><span class="font-display text-xl font-bold">Dad</span><div class="relative h-14 rounded-xl bg-ink"><i class="blk blk-soon !py-2" style="left:20%;width:30%"><b>Match</b></i></div></div>
+          <div class="grid items-center gap-2 md:grid-cols-[8rem_1fr]"><span class="font-display text-xl font-bold">Maya</span><div class="relative h-14 rounded-xl bg-ink"><i class="blk border-glow bg-glow/15 !py-2 text-bone" style="left:50%;width:40%"><b>Movie</b></i></div></div>
+          <div class="grid items-center gap-2 md:grid-cols-[8rem_1fr]"><span class="font-display text-xl font-bold">Kabir</span><div class="relative h-14 rounded-xl bg-ink"><i class="blk blk-done !py-2" style="left:0;width:20%"><b>Done</b></i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ecosystem -->
+    <section id="ecosystem" class="border-t border-line px-5 py-32 md:px-10 md:py-48">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="max-w-4xl font-display text-[clamp(2.4rem,7vw,6.5rem)] font-bold leading-[.98] tracking-[-.035em]">Your phone asks. The cloud plans. The TV shows.</h2>
+        <div class="relative mt-20 grid gap-6 md:grid-cols-3" id="eco">
+          <div class="rail absolute left-6 top-6 hidden h-[calc(100%-3rem)] w-px md:left-[16%] md:top-8 md:block md:h-px md:w-[68%]" aria-hidden="true"></div>
+          <article class="node relative rounded-2xl border border-line bg-panel p-7"><i data-lucide="smartphone" class="mb-6 size-7 text-glow"></i><h3 class="font-display text-2xl font-bold">Web and Android</h3><p class="mt-2 text-mist">Request a window, check the schedule, from wherever you are.</p><p class="mt-5 text-sm font-semibold text-free">Web working today · Android in development</p></article>
+          <article class="node relative rounded-2xl border border-line bg-panel p-7"><i data-lucide="cloud" class="mb-6 size-7 text-glow"></i><h3 class="font-display text-2xl font-bold">One shared schedule</h3><p class="mt-2 text-mist">A single source of truth for reservations, availability and clashes.</p><p class="mt-5 text-sm font-semibold text-free">Working today</p></article>
+          <article class="node relative rounded-2xl border border-line bg-panel p-7"><i data-lucide="tv" class="mb-6 size-7 text-glow"></i><h3 class="font-display text-2xl font-bold">On the TV itself</h3><p class="mt-2 text-mist">See what's next without picking up a phone. Fire TV and Vega are next.</p><p class="mt-5 text-sm font-semibold text-soon">TV in development · Fire TV / Vega planned</p></article>
+        </div>
+        <p class="mt-10 flex items-center gap-3 text-mist"><i data-lucide="message-square-text" class="size-5 text-glow"></i>Planned: ask in plain words, like "Movie tonight, about two hours," with AWS language services.</p>
+      </div>
+    </section>
+
+    <!-- Intelligent scheduling (planned) -->
+    <section id="ask" class="border-t border-line px-5 py-32 md:px-10 md:py-48" aria-labelledby="ask-h">
+      <div class="mx-auto max-w-7xl">
+        <p class="mb-6 inline-block rounded-full border border-soon px-3 py-1 text-sm text-soon">Planned</p>
+        <h2 id="ask-h" class="font-display text-[clamp(2.4rem,7vw,6.5rem)] font-bold leading-[.98] tracking-[-.035em]">Just say what you need.</h2>
+        <ol class="mt-16 grid gap-4 md:grid-cols-4">
+          <li class="ask rounded-2xl border border-line bg-panel p-6"><p class="text-sm text-mist">You say</p><p class="mt-3 font-display text-2xl font-bold">"I need two hours tonight."</p></li>
+          <li class="ask rounded-2xl border border-line bg-panel p-6"><p class="text-sm text-mist">It understands</p><p class="mt-3 text-lg">Who: Maya<br>Length: 2 hours<br>When: tonight</p></li>
+          <li class="ask rounded-2xl border border-line bg-panel p-6"><p class="text-sm text-mist">It checks the schedule</p><p class="mt-3 font-display text-2xl font-bold text-free">8:30 – 10:30 PM is free</p></li>
+          <li class="ask rounded-2xl border border-glow bg-panel p-6"><p class="text-sm text-mist">You confirm</p><p class="mt-3 font-display text-2xl font-bold text-glow">Reserved.</p></li>
+        </ol>
+        <p class="mt-8 max-w-xl text-mist">Planned with AWS language services. Today you book by choosing who, what and how long.</p>
+      </div>
+    </section>
+
+    <!-- Vision -->
+    <section id="vision" class="px-5 py-32 md:px-10 md:py-48" aria-labelledby="vision-h">
+      <div class="mx-auto max-w-7xl">
+        <h2 id="vision-h" class="sr-only">Where WatchWindow is going</h2>
+        <dl class="divide-y divide-line border-y border-line font-display">
+          <div class="grid gap-2 py-8 md:grid-cols-[12rem_1fr] md:items-baseline"><dt class="text-xl text-free">Today</dt><dd class="text-3xl font-bold tracking-tight md:text-5xl">Shared TV scheduling on the web.</dd></div>
+          <div class="grid gap-2 py-8 md:grid-cols-[12rem_1fr] md:items-baseline"><dt class="text-xl text-soon">Next</dt><dd class="text-3xl font-bold tracking-tight md:text-5xl">Android and TV, on the same schedule.</dd></div>
+          <div class="grid gap-2 py-8 md:grid-cols-[12rem_1fr] md:items-baseline"><dt class="text-xl text-mist">Later</dt><dd class="text-3xl font-bold tracking-tight md:text-5xl">A household layer that knows what every screen is doing.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="try" class="bg-bone px-5 py-32 text-ink md:px-10 md:py-48">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="font-display text-[clamp(3rem,11vw,10rem)] font-extrabold leading-[.9] tracking-[-.04em]">Claim your window.</h2>
+        <div class="mt-12 flex flex-wrap items-center gap-6">
+          <a data-cfg="app" href="/app" class="group inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 text-lg font-semibold text-bone transition hover:bg-black">Try WatchWindow <i data-lucide="arrow-right" class="size-5 transition-transform group-hover:translate-x-1"></i></a>
+          <a data-cfg="github" href="#" rel="noopener" class="flex items-center gap-2 font-semibold underline underline-offset-4"><i data-lucide="github" class="size-5"></i>View on GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line px-5 pb-10 pt-20 text-sm text-mist md:px-10">
+    <div class="mx-auto max-w-7xl">
+      <p class="select-none font-display text-[clamp(3rem,13vw,12rem)] font-extrabold leading-[.85] tracking-[-.05em] text-panel" aria-hidden="true">WatchWindow</p>
+      <div class="mt-16 grid grid-cols-2 gap-10 md:grid-cols-5">
+        <div><h3 class="mb-4 font-semibold text-bone">Product</h3><ul class="space-y-2"><li><a data-cfg=app href="/app" class="transition hover:text-bone">Web</a></li><li>Android <span class="text-soon">(in development)</span></li><li>TV <span class="text-soon">(in development)</span></li><li><a href="#demo" class="transition hover:text-bone">Try the demo</a></li></ul></div>
+        <div><h3 class="mb-4 font-semibold text-bone">Resources</h3><ul class="space-y-2"><li><a data-cfg=github href="#" class="transition hover:text-bone">GitHub</a></li><li><a href="#how" class="transition hover:text-bone">How it works</a></li></ul></div>
+        <div><h3 class="mb-4 font-semibold text-bone">Project</h3><ul class="space-y-2"><li><a data-cfg=email href="#" class="transition hover:text-bone">Contact</a></li></ul></div>
+        <div><h3 class="mb-4 font-semibold text-bone">Legal</h3><ul class="space-y-2"><li><a href="privacy.html" class="transition hover:text-bone">Privacy Policy</a></li><li><a href="terms.html" class="transition hover:text-bone">Terms of Service</a></li></ul></div>
+        <div><h3 class="mb-4 font-semibold text-bone">Connect</h3><ul class="space-y-2"><li><a data-cfg=github href="#" class="transition hover:text-bone">GitHub</a></li><li><a data-cfg=linkedin href="#" class="transition hover:text-bone">LinkedIn</a></li><li><a data-cfg=email href="#" class="transition hover:text-bone">Email</a></li></ul></div>
+      </div>
+      <div class="mt-16 flex flex-col justify-between gap-2 border-t border-line pt-6 md:flex-row"><p>© 2026 WatchWindow</p><p>Built for households that share one screen.</p></div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.460.0/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="src/script.js"></script>
+</body>
+</html>
